@@ -1,0 +1,19 @@
+CREATE TABLE public.usuario
+(
+    id_usuario integer NOT NULL DEFAULT nextval('usuario_id_usuario_seq'::regclass),
+    nombre character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    apellido character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "contraseña" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "teléfono" character varying(15) COLLATE pg_catalog."default",
+    "método_de_pago" character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT usuario_pkey PRIMARY KEY (id_usuario),
+    CONSTRAINT usuario_email_key UNIQUE (email)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.usuario
+    OWNER to postgres;
