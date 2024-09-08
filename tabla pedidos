@@ -1,0 +1,25 @@
+CREATE TABLE public.pedido
+(
+    id_pedido integer NOT NULL DEFAULT nextval('pedido_id_pedido_seq'::regclass),
+    id_usuario integer,
+    total numeric(12,2),
+    fecha_pedido date NOT NULL,
+    id_locatario integer,
+    estado_pedido character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT pedido_pkey PRIMARY KEY (id_pedido),
+    CONSTRAINT pedido_id_locatario_fkey FOREIGN KEY (id_locatario)
+        REFERENCES public.locatario (id_locatario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT pedido_id_usuario_fkey FOREIGN KEY (id_usuario)
+        REFERENCES public.usuario (id_usuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.pedido
+    OWNER to postgres;
