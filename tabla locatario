@@ -1,0 +1,23 @@
+-- Table: public.locatario
+
+-- DROP TABLE public.locatario;
+
+CREATE TABLE public.locatario
+(
+    id_locatario integer NOT NULL DEFAULT nextval('locatario_id_locatario_seq'::regclass),
+    nombre_locatario character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "contraseña" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "dirección" character varying(100) COLLATE pg_catalog."default",
+    "teléfono" character varying(15) COLLATE pg_catalog."default",
+    fecha_de_registro date NOT NULL,
+    CONSTRAINT locatario_pkey PRIMARY KEY (id_locatario),
+    CONSTRAINT locatario_email_key UNIQUE (email)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.locatario
+    OWNER to postgres;
