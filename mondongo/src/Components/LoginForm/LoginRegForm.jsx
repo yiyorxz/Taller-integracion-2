@@ -4,13 +4,14 @@ import './LoginRegForm.css';
 
 const RegisterForm = () => {
     return (
+        
     <div>
         <div className='wrapper'>
             <form action="">
                 <h1>Crea tu Cuenta</h1>
                 <div className='input-box'>
                     <input type="email" placeholder='Correo' required/>
-                    <FaUser />
+                    <FaUser className='icon'/>
                 </div>
                 <div className='input-box'>
                     <input type="text" placeholder='Nombre Completo' required/>
@@ -20,7 +21,7 @@ const RegisterForm = () => {
                 </div>
                 <div className='input-box'>
                     <input type="password" placeholder='Contraseña' required/>
-                    <FaLock /> 
+                    <FaLock className='icon'/> 
                 </div>
                 <div className='input-box'>
                     <input type="password" placeholder='Repetir Contraseña' required/>
@@ -33,11 +34,12 @@ const RegisterForm = () => {
 
                 <button type='submit'>Crear</button>
                 <div className='register-link'>
-                    <p>Ya tienes una cuenta? <a href="">Inicia Sesion</a></p>
+                    <p>Ya tienes una cuenta? <a href="./Components/LoginForm/LoginIniForm">Inicia Sesion</a></p>
                 </div>
             </form>
-            
-        </div>
+             </div>
+        
+        
         <footer className='foot'>
         <p>Mondongo S.A</p>
         </footer>
