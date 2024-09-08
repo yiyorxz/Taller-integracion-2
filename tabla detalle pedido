@@ -1,0 +1,28 @@
+-- Table: public.detalle_pedido
+
+-- DROP TABLE public.detalle_pedido;
+
+CREATE TABLE public.detalle_pedido
+(
+    id_detalle_pedido integer NOT NULL DEFAULT nextval('detalle_pedido_id_detalle_pedido_seq'::regclass),
+    id_pedido integer,
+    id_producto integer,
+    cantidad integer NOT NULL,
+    precio numeric(10,2) NOT NULL,
+    CONSTRAINT detalle_pedido_pkey PRIMARY KEY (id_detalle_pedido),
+    CONSTRAINT detalle_pedido_id_pedido_fkey FOREIGN KEY (id_pedido)
+        REFERENCES public.pedido (id_pedido) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT detalle_pedido_id_producto_fkey FOREIGN KEY (id_producto)
+        REFERENCES public.producto (id_producto) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.detalle_pedido
+    OWNER to postgres;
