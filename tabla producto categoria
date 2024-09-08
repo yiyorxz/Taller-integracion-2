@@ -1,0 +1,25 @@
+-- Table: public.producto_categoria
+
+-- DROP TABLE public.producto_categoria;
+
+CREATE TABLE public.producto_categoria
+(
+    id_producto integer NOT NULL,
+    id_categoria integer NOT NULL,
+    CONSTRAINT producto_categoria_pkey PRIMARY KEY (id_producto, id_categoria),
+    CONSTRAINT producto_categoria_id_categoria_fkey FOREIGN KEY (id_categoria)
+        REFERENCES public.categoria (id_categoria) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT producto_categoria_id_producto_fkey FOREIGN KEY (id_producto)
+        REFERENCES public.producto (id_producto) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.producto_categoria
+    OWNER to postgres;
