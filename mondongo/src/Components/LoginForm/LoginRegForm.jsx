@@ -10,7 +10,7 @@ const RegisterForm = () => {
                 <h1>Crea tu Cuenta</h1>
                 <div className='input-box'>
                     <input type="email" placeholder='Correo' required/>
-                    <FaUser />
+                    <FaUser style={{color:'black'}}/>
                 </div>
                 <div className='input-box'>
                     <input type="text" placeholder='Nombre Completo' required/>
@@ -20,7 +20,7 @@ const RegisterForm = () => {
                 </div>
                 <div className='input-box'>
                     <input type="password" placeholder='Contraseña' required/>
-                    <FaLock /> 
+                    <FaLock style={{color:'black'}}/> 
                 </div>
                 <div className='input-box'>
                     <input type="password" placeholder='Repetir Contraseña' required/>
@@ -36,11 +36,7 @@ const RegisterForm = () => {
                     <p>Ya tienes una cuenta? <a href="">Inicia Sesion</a></p>
                 </div>
             </form>
-            
         </div>
-        <footer className='foot'>
-        <p>Mondongo S.A</p>
-        </footer>
     </div>
     );
 };
