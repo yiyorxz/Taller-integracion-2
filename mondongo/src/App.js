@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import RegisterForm from './Components/LoginForm/LoginRegForm';
 import Navbar from './Components/Navbar/Navbar';
-
+import TerraceEquipment from './Components/TerraceEquipment/TerraceEquipment';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Navbar/> 
       </header>
       <body>       
-        <RegisterForm/>
+        <TerraceEquipment/>
       </body>
       <footer className='foot'>
         <p>Mondongo S.A</p>
