@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import RegisterForm from './Components/LoginForm/LoginRegForm';
 import Navbar from './Components/Navbar/Navbar';
+import Footer from './Components/Footer/Footer';
 
 
 function App() {
@@ -13,9 +14,7 @@ function App() {
       <body>       
         <RegisterForm/>
       </body>
-      <footer className='foot'>
-        <p>Mondongo S.A</p>
-      </footer>
+        <Footer/>
     </div>
 
   );

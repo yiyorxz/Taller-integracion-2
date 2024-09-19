@@ -4,11 +4,13 @@ body{
     background-size: 1990px 1200px; /* Define un tamaño específico para la imagen de fondo */
     background-attachment: fixed;
     overflow-y: hidden;
+    
 }
 
 
 
 .wrapper {
+    margin-top: -13rem;
     width: 420px;
     background: whitesmoke;
     border: 2px solid black;
@@ -112,8 +114,3 @@ body{
     text-decoration: underline;
 }
 
-.foot{
-    background-color:  #00F4D4;
-    text-align: center;
-    padding: 2rem;
-}
