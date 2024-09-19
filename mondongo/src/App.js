@@ -11,7 +11,7 @@ function App() {
       <Navbar/> 
       </header>
       <body>       
-        <TerraceEquipment/>
+        <RegisterForm/>
       </body>
       <footer className='foot'>
         <p>Mondongo S.A</p>

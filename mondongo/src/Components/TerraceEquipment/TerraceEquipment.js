@@ -11,7 +11,8 @@ const TerraceEquipment = () => {
 
   return (
     <div className="terrace-equipment">
-      <h2>Equipa tu Terraza</h2>
+      <h2>Productos
+      </h2>
       <div className="product-list">
         {products.map(product => (
           <ProductCard key={product.id} product={product} />
