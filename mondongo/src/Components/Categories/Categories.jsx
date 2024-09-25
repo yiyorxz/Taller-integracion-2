@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 function Categories() {
   const categories = [
-    { id: 1, name: 'Electrónica', path: '/category/electronica' },
-    { id: 2, name: 'Moda', path: '/category/moda' },
-    { id: 3, name: 'Hogar', path: '/category/hogar' },
+    { id: 1, name: 'Frutas', path: '/category/electronica' },
+    { id: 2, name: 'Verduras', path: '/category/moda' },
+    { id: 3, name: 'Carnes', path: '/category/hogar' },
   ];
 
   return (
