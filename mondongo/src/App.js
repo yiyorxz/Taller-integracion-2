@@ -8,10 +8,12 @@ import Header from './Components/Header/Header';
 import HomePage from './pages/Homepage';
 import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/Registerpage';
+import Navbar from './Components/Navbar/Navbar';
 
 function App() {
   return (
     <Router>
+      <Navbar/>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
