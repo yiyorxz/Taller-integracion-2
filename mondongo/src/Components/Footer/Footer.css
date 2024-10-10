@@ -2,7 +2,11 @@
     bottom: 0;
     height: 60px;
     background-color: #00F4D4;;
+<<<<<<< HEAD
     position: fixed;
+=======
+    position: center;
+>>>>>>> Rodrigo
     padding-bottom: 10rem;
     display: flex;
     width: 100%;
