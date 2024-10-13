@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from '../Components/Carousel/Carousel'
 import Categories from '../Components/Categories/Categories'; // Sección de categorías
 import Footer from '../Components/Footer/Footer'; // Pie de página
 import './Homepage.css'; // Estilos de la página de inicio
 
 
-const HomePage() {
+const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
     

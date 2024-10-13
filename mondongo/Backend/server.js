@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 9000;
 const cors = require('cors');
 require('dotenv').config();
-import pool from './db';
+const pool = require('./db');
 app.use(cors());
 app.use(express());
 
