@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import '../Products/products.css';
 
 
 const Products = () => {
@@ -32,6 +32,7 @@ const Products = () => {
         <div key={product.id_producto} className='product-item'>
           <h2 className='product-name'>{product.nombre_producto}</h2>
           <p className='product-price'>${product.precio}</p>
+          <button type="button" class="btn btn-warning">Agregar Al Carro</button>
           </div>
         ))}
     </div>
