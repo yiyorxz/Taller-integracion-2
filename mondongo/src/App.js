@@ -7,6 +7,7 @@ import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/Registerpage';
 import Navbar from './Components/Navbar/Navbar';
 import { useState } from 'react';
+import Pagina from './pages/Productos';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/products" element={<Pagina/>}/>
       </Routes>
     </Router>
   );
