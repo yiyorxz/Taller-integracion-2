@@ -34,7 +34,7 @@ function Navbar() {
           <li><Link to="/deals">Ofertas</Link></li>
           <li><Link to="/products">Categorías</Link></li>
           <li><Link to="/account">Mi cuenta</Link></li>
-          <li><Link to="/cart">Carrito</Link></li>
+          <li><Link to="/Productos">Carrito</Link></li>
         </ul>
       </div>
 

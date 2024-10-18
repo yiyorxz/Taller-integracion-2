@@ -8,6 +8,9 @@ import RegisterPage from './pages/Registerpage';
 import Navbar from './Components/Navbar/Navbar';
 import { useState } from 'react';
 import Pagina from './pages/Productos';
+import { supabase } from './Components/Conex/script1';
+import Productos from './Productos/Producto';
+
 
 
 
@@ -22,6 +25,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/products" element={<Pagina/>}/>
+        <Route path="/Productos" element={<Productos/>}/>
       </Routes>
     </Router>
   );

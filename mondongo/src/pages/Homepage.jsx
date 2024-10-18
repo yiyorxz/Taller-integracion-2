@@ -5,6 +5,7 @@ import Footer from '../Components/Footer/Footer'; // Pie de página
 import './Homepage.css'; // Estilos de la página de inicio
 import Products from '../Components/Products/products';
 import App from './Productos';
+import Productos from '../Productos/Producto';
 
 
 function HomePage() {
