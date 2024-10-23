@@ -54,12 +54,12 @@ export const ProductList = ({
       <h1>Productos</h1>
       <div style={{display:'flex', flexWrap:'wrap', justifyContent: 'space-between'}}>
         {productos.map(producto => (
-          <div key={producto.id} style={{width:'18%'}}> 
+          <div key={producto.id} style={{width:'18%', marginBottom: '20px' }}> 
           <img
             src={producto.imagen_producto} 
-            width="150" 
+            width="150"
           />
-          <h2 className='product-name'>{producto.nombre_producto}</h2>
+          <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
           <button type="button" class="btn btn-warning" onClick={() => onAddProduct(producto)}>Agregar Al Carro</button>
           </div>

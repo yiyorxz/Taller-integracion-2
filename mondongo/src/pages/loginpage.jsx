@@ -5,7 +5,7 @@ function LoginPage() {
       
       <h1>Login</h1>
       <form>
-        <input type="text" placeholder="Username" />
+        <input type="email" name='email' placeholder="tucorreo@dominio.com" />
         <input type="password" placeholder="Password" />
         <button type="submit">Login</button>
       </form>
