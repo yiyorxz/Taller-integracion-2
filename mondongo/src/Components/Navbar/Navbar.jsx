@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../Logo/1.png';
+import { Header } from '../Products1/Header';
+import { ProductList } from '../Products1/ProductList';
+import { supabase } from '../Conex/script1';
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [allProducts, setAllProducts] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [countProducts, setCountProducts] = useState(0);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -11,14 +19,10 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* Logo de Mercado Libre */}
       <div className="navbar-brand">
-        <Link to="/">
-          <img src="" alt="Logo" className="navbar-logo" />
-        </Link>
+        <img src={logo} style={{width:'150px'}}/>
       </div>
 
-      {/* Barra de búsqueda */}
       <div className="navbar-search">
         <input
           type="text"
@@ -28,17 +32,23 @@ function Navbar() {
         <button className="navbar-search-btn">Buscar</button>
       </div>
 
-      {/* Enlaces de cuenta y categorías */}
       <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
         <ul className="navbar-links">
           <li><Link to="/deals">Ofertas</Link></li>
           <li><Link to="/products">Categorías</Link></li>
           <li><Link to="/account">Mi cuenta</Link></li>
-          <li><Link to="/Productos">Carrito</Link></li>
+          <li>
+            <Header
+            allProducts={allProducts}
+			      setAllProducts={setAllProducts}
+			      total={total}
+			      setTotal={setTotal}
+			      countProducts={countProducts}
+			      setCountProducts={setCountProducts}
+            />
+          </li>
         </ul>
       </div>
-
-      {/* Menú de hamburguesa para móviles */}
       <button className="navbar-toggle" onClick={toggleMenu}>
         &#9776;
       </button>

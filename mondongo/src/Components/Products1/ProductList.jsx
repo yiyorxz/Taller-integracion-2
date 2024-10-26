@@ -33,9 +33,9 @@ export const ProductList = ({
   const onAddProduct = (product) => {
     const quantity = 1; // Inicializamos la cantidad en 1
   
-    if (allProducts.find(item => item.id === product.id)) {
+    if (allProducts.find(item => item.id_producto === product.id_producto)) {
       const products = allProducts.map(item =>
-        item.id === product.id
+        item.id_producto === product.id_producto
           ? { ...item, quantity: item.quantity + quantity }
           : item
       );
@@ -54,7 +54,7 @@ export const ProductList = ({
       <h1>Productos</h1>
       <div style={{display:'flex', flexWrap:'wrap', justifyContent: 'space-between'}}>
         {productos.map(producto => (
-          <div key={producto.id} style={{width:'18%', marginBottom: '20px' }}> 
+          <div key={producto.id_producto} style={{width:'18%', marginBottom: '20px' }}> 
           <img
             src={producto.imagen_producto} 
             width="150"

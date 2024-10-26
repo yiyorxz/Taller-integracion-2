@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
+import '../Navbar/Navbar.css';
+import logo from '../Logo/1.png';
 
 export const Header = ({
 	allProducts,
@@ -9,16 +12,19 @@ export const Header = ({
 	setTotal,
 }) => {
 	const [active, setActive] = useState(false);
-
 	const onDeleteProduct = product => {
 		const results = allProducts.filter(
-			item => item.id !== product.id
+			item => item.id_producto !== product.id_producto
 		);
-
-		setTotal(total - product.price * product.quantity);
+		setTotal(total - product.precio * product.quantity);
 		setCountProducts(countProducts - product.quantity);
 		setAllProducts(results);
 	};
+	const toggleMenu = () => {
+		setIsOpen(!isOpen);
+	};
+	const [isOpen, setIsOpen] = useState(false);
+	
 
 	const onCleanCart = () => {
 		setAllProducts([]);
@@ -27,9 +33,25 @@ export const Header = ({
 	};
 
 	return (
-		<header>
-			<h1>Tienda</h1>
+		<nav className="navbar">
+		<div className="navbar-brand">
+		  <img src={logo} style={{width:'150px'}}/>
+		</div>
 
+		<div className="navbar-search">
+		  <input
+			type="text"
+			placeholder="Buscar productos, marcas y más..."
+			className="navbar-search-input"
+		  />
+		  <button className="navbar-search-btn">Buscar</button>
+		</div>
+		<div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
+        <ul className="navbar-links">
+          <li><Link to="/deals">Ofertas</Link></li>
+          <li><Link to="/products">Categorías</Link></li>
+          <li><Link to="/account">Mi cuenta</Link></li>
+		  <li>
 			<div className='container-icon'>
 				<div
 					className='container-cart-icon'
@@ -42,8 +64,8 @@ export const Header = ({
 						strokeWidth='1.5'
 						stroke='currentColor'
 						className='icon-cart'
-						width={"18"}
-						height={"18"}
+						width={"38"}
+						height={"38"}
 
 					>
 						<path
@@ -66,16 +88,17 @@ export const Header = ({
 						<>
 							<div className='row-product'>
 								{allProducts.map(product => (
-									<div className='cart-product' key={product.id}>
+									<div className='cart-product' key={product.id_producto}>
 										<div className='info-cart-product'>
+											
 											<span className='cantidad-producto-carrito'>
 												{product.quantity}
 											</span>
 											<p className='titulo-producto-carrito'>
-												{product.nameProduct}
+												{product.nombre_producto}
 											</p>
 											<span className='precio-producto-carrito'>
-												${product.price}
+												${product.precio}
 											</span>
 										</div>
 										<svg
@@ -85,8 +108,8 @@ export const Header = ({
 											strokeWidth='1.5'
 											stroke='currentColor'
 											className='icon-close'
-											width={"18"}
-											height={"18"}
+											width={"28"}
+											height={"28"}
 											onClick={() => onDeleteProduct(product)}
 										>
 											<path
@@ -113,6 +136,13 @@ export const Header = ({
 					)}
 				</div>
 			</div>
-		</header>
+			</li>	
+		</ul>
+      	</div>
+		<button className="navbar-toggle" onClick={toggleMenu}>
+        &#9776;
+      </button>
+    </nav>
+	
 	);
 };

@@ -14,13 +14,7 @@ function HomePage() {
 	const [countProducts, setCountProducts] = useState(0);
   return (
     <div>
-      <main>
-        <section className="hero">
-          <h1>Bienvenidos a Nuestra Tienda</h1>
-          <p>Descubre los mejores productos para cada categoría.</p>
-         <Carousel/>
-        </section>
-        <Header
+	 	<Header
 			allProducts={allProducts}
 			setAllProducts={setAllProducts}
 			total={total}
@@ -28,6 +22,13 @@ function HomePage() {
 			countProducts={countProducts}
 			setCountProducts={setCountProducts}
 		/>
+      <main>
+        <section className="hero">
+          <h1>Bienvenidos a Nuestra Tienda</h1>
+          <p>Descubre los mejores productos para cada categoría.</p>
+         <Carousel/>
+        </section>
+       
 		<ProductList
 			allProducts={allProducts}
 			setAllProducts={setAllProducts}

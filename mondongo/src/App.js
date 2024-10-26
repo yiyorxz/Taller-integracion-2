@@ -16,8 +16,6 @@ import Productos from './Productos/Producto';
 function App() {
   return (
     <Router>
-      <Navbar/>
-      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
