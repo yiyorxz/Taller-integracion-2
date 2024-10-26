@@ -1,0 +1,62 @@
+// ComentarioSinUsuario.js
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../servicios/supabaseClient';
+
+const ComentarioSinUsuario = ({ productId }) => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const { data, error } = await supabase
+        .from('comentarios')
+        .select('*')
+        .eq('id_producto', productId);
+      if (error) {
+        console.log('Error al obtener comentarios:', error);
+      } else {
+        setComments(data || []);
+      }
+    };
+
+    fetchComments();
+  }, [productId]);
+
+  const handleAddComment = async () => {
+    const { data, error } = await supabase
+      .from('comentarios')
+      .insert([{ id_producto: productId, comentario: newComment }]);
+    
+    if (error) {
+      console.log('Error al añadir comentario:', error);
+    } else if (data && data.length > 0) {
+      // Solo agregar si data contiene comentarios válidos
+      setComments([...comments, data[0]]);
+      setNewComment('');
+    } else {
+      console.log('Error: No se recibió un comentario válido desde Supabase.');
+    }
+  };
+
+  return (
+    <div>
+      <h3>Comentarios</h3>
+      {comments.length === 0 ? (
+        <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+      ) : (
+        comments.map((comment) => (
+          <p key={comment.id_comentario}>{comment.comentario}</p>
+        ))
+      )}
+      <input
+        type="text"
+        value={newComment}
+        onChange={(e) => setNewComment(e.target.value)}
+        placeholder="Escribe un comentario..."
+      />
+      <button onClick={handleAddComment}>Agregar Comentario</button>
+    </div>
+  );
+};
+
+export default ComentarioSinUsuario;
