@@ -1,0 +1,99 @@
+# E-commerce System
+
+## Introducción
+
+Este sistema de e-commerce está diseñado para facilitar la interacción entre compradores y vendedores. Cada tipo de usuario tiene diferentes permisos y funcionalidades que se adaptan a sus necesidades. A continuación, se describen las características y pantallas clave del sistema.
+
+## Archivo de Permisos de Usuario
+
+El archivo de permisos de usuario define las diferentes funcionalidades disponibles según el rol del usuario. Los roles son:
+- **Comprador**: Permite navegar por productos, realizar pedidos, gestionar su perfil y ver ofertas.
+- **Vendedor**: Permite publicar productos, gestionar pedidos y realizar seguimiento a las ventas.
+- **Administrador**: Control total sobre la plataforma, incluyendo la gestión de usuarios y productos.
+
+## Características del Sistema
+
+### Pantallas para Compradores
+
+1. **Pantalla de Registro/Iniciar Sesión**:
+   - El comprador podrá registrarse o iniciar sesión en su cuenta. 
+
+2. **Interfaz Principal**:
+   - Filtros para buscar productos.
+   - Acceso a detalles del producto.
+   - Historial de pedidos.
+   - Pop-ups de ofertas.
+   - Visualización de todas las ofertas disponibles.
+   - Acceso a su perfil y a la lista de vendedores.
+
+3. **Pantalla de Vendedores**:
+   - Muestra la lista de vendedores disponibles y sus productos.
+
+4. **Pantalla de Perfil**:
+   - Permite agregar métodos de pago, ver favoritos, editar nombre y foto de perfil, y cambiar ubicación.
+
+5. **Pantalla de Favoritos**:
+   - Lista de productos favoritos del usuario para facilitar futuras compras.
+
+6. **Pantalla de Historial de Pedidos**:
+   - Muestra todos los pedidos realizados con detalles como fecha y costo.
+
+7. **Pantalla de Detalle de Pedido**:
+   - Detalle específico de los productos comprados en un pedido.
+
+8. **Pantalla de Producto**:
+   - Descripción del producto, opción de comentar, reseñar, agregar al carrito y ver más productos del vendedor.
+
+9. **Pantalla de Carrito**:
+   - Permite gestionar los productos añadidos, vaciar el carrito y proceder al pago.
+
+10. **Pantalla de Pago**:
+    - Detalles del pago (a definir).
+
+11. **Pantalla de Ofertas**:
+    - Similar a la pantalla de productos, pero solo muestra productos en oferta.
+
+### Pantallas para Vendedores
+
+1. **Pantalla de Registro/Iniciar Sesión**:
+   - El vendedor podrá registrarse o iniciar sesión en su cuenta.
+
+2. **Interfaz Principal**:
+   - Funciones para publicar productos, gestionar pedidos y acceso a las diferentes pantallas.
+
+3. **Pantalla de Publicar Producto**:
+   - Rellenar campos como descripción, nombre, fotos, etc.
+
+4. **Pantalla de Productos**:
+   - Funciones para actualizar, poner en oferta, ocultar o eliminar productos.
+
+5. **Pantalla de Pedidos Pendientes**:
+   - Muestra todos los pedidos solicitados y detalles relevantes.
+
+6. **Pantalla de Detalle de Pedido**:
+   - Detalle más profundo del pedido con opciones para cambiar el estado.
+
+7. **Pantalla de Pop-ups**:
+   - Permite crear ofertas que aparecerán a los compradores.
+
+## Plan Horno de Mondongo
+
+El "Horno de Mondongo" es nuestro plan de contingencia para avanzar en el proyecto. Este incluye:
+- Seguimiento del feedback del profesor.
+- Asignación de tareas del backlog.
+- Establecimiento de reuniones para solicitar avances y resolver dudas.
+
+## Base de Datos
+
+La base de datos está diseñada para manejar la información de los usuarios, productos, pedidos, y más. Las tablas principales incluyen:
+
+- `usuario`: Tabla que contiene la información de los usuarios y sus roles.
+- `producto`: Información detallada de los productos disponibles.
+- `pedido`: Registro de compras realizadas por los usuarios.
+- `carrito`: Productos añadidos al carrito de compras.
+- `favoritos`: Productos que los usuarios han marcado como favoritos.
+
+## Conclusión
+
+Este sistema está diseñado para ofrecer una experiencia de compra eficiente y fluida, permitiendo a los compradores y vendedores interactuar de manera efectiva. Cada pantalla y funcionalidad ha sido desarrollada para optimizar el flujo de trabajo y la satisfacción del usuario.
+lo intente muyayos, comenten si algo les chirria

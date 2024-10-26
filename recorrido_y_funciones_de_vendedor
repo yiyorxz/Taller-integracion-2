@@ -1,0 +1,8 @@
+pantalla1: el vendedor en un inicio podra registrarse o iniciar sesion
+pantalla 2: de forma similar al comprador el vendedor tambien tendra su propia interfaz con diversas pantallas,podra publicar un producto (lo que lo llevara a aotra pantalla), tambien podra entrar a los detalles de los productos que tiene publicados, el vendedor tambien podra ver todos los pedidos que tiene pendientes(esto sera una pantalla) para ponerse de acuerdo con los transportistas y cambiar el estado de pendiente a completo en los detalles del pedido(otra pantalla) 
+publicar producto: un vendedor podra publicar diversos productos a traves de la funcionalidad, podra rellenar diversos campos como la descripcionde los productos el nombre,las fotos etc.
+pantalla de productos: el vendedor podra hcaer multiples funciones respecto al producto, podra actulaizar sus campos, ponerlo en oferta, borrarlo, ocultarlo y otras funciones que discutamos.
+pedidos pendientes:esta sera una pantalla donde el vendedor podra ver todos los pedidos que tiene solicitados, viendo todas las cosas que ese pedido incluye la ganancia y la id del productos y entrar a los detalles del producto.
+detalles de pedido: vera mas a profundidad el pedido y podra cambiar el estado de pendiente a cancelado o enviado
+publicar un pop up; un vendedor puede poner una oferta para que a los vendedores le aparescan los pop ups
+seguire escribiendo esto mañana ya son las 3 de la mañana y estoy agotado
