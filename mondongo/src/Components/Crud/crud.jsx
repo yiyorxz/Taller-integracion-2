@@ -1,13 +1,16 @@
-// Modal.js
+
 import React, { useEffect, useState } from 'react';
 import { supabase } from "../Conex/script1"
 import Lottie from 'react-lottie';
 import animacion1 from '../Animaciones/Animation - 1730228916688.json'
+import animacion2 from '../Animaciones/Animation - 1730313250226.json' 
 
 
 const Crud = ({ isOpen, onClose }) => {
+
 	
     const [showAnimation, setShowAnimation] = useState(false);
+    const [showAnimation2, setShowAnimation2] = useState(false);
     const [nombre_producto, setnombre] = useState('');
     const [descripcion, setdescripcion] = useState('')
     const [precio, setprecio] = useState('')
@@ -16,9 +19,35 @@ const Crud = ({ isOpen, onClose }) => {
     const [existencias, setexistencias] = useState('')
     const [iva, setiva] = useState('')
     const [peso, setpeso] = useState('')
-    const [fecha_creacion, setfecha] = useState('')
-   
+    const [imagen_producto, setimagen] = useState(null)
+    const [file, setFile] = useState(null);
+    const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+
+    
+
+    const _handleImageChange = (e) => {
+        let reader = new FileReader();
+        let file = e.target.files[0];
+    
+        reader.onloadend = () => {
+            setFile(file);
+            setImagePreviewUrl(reader.result);
+            setimagen(reader.result);
+        };
+    
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
+    
     const agrega= async () => {
+
+        if (!nombre_producto || !descripcion || !precio || !categoria || !dimensiones || !existencias || !iva || !peso || !imagen_producto){
+            console.log("Error, hay campos sin rellenar")
+            setShowAnimation2(true);
+            setTimeout(() => setShowAnimation2(false), 2000);
+            return;
+        }
         const { error } = await supabase
         .from('producto')
         .insert({
@@ -30,19 +59,22 @@ const Crud = ({ isOpen, onClose }) => {
             existencias,
             iva,
             peso,
-            fecha_creacion,
+            imagen_producto: imagen_producto
 
         })
         if(error){
             console.error("error", console.error);
+            setShowAnimation2(true);
+            setTimeout(() => setShowAnimation2(false), 2000);
         }
         else{
             console.log("producto agregado");
-            setShowAnimation(true);
-            setTimeout(() => setShowAnimation(false), 2000);
+            setShowAnimation(true);  
+            setTimeout(() => {setShowAnimation(false); window.location.reload(); }, 2000);
+            
         }
     }
-    const defaultOptions = {
+    const defaultOptions1 = {
         loop: false,
         autoplay: true,
         animationData: animacion1,
@@ -50,7 +82,18 @@ const Crud = ({ isOpen, onClose }) => {
           preserveAspectRatio: 'xMidYMid slice'
         }
     };
-    if (!isOpen) return null;
+
+    const defaultOptions2 = {
+        loop: false,
+        autoplay: true,
+        animationData: animacion2,
+        rendererSettings:{
+          preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
+    if(!isOpen) return null;
+        
 	return (
         <div className='modal fade show' style={{ display: 'block' }}>
             <div className='modal-dialog'>
@@ -96,10 +139,10 @@ const Crud = ({ isOpen, onClose }) => {
                         </div>
                         <div className='input-group mb-3'>
                             <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
-                            <input type='date' id='fecha' className='form-control' placeholder='Fecha' value={fecha_creacion} onChange={(e) => setfecha(e.target.value)}></input>
+                            <input type='file' id='imagen' className='form-control' placeholder='Imagen' onChange={_handleImageChange}></input>
                         </div>
                         <div className='modal-footer'>
-                            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={agrega}>Agregar</button>
+                            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={agrega}  >Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -116,13 +159,30 @@ const Crud = ({ isOpen, onClose }) => {
           padding: '78px',
           borderRadius: '10px'
         }}>
-          <Lottie options={defaultOptions} height={150} width={150} />
+          <Lottie options={defaultOptions1} height={150} width={150} />
           <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px' }}>Producto agregado!</p>
+          
+        </div>
+      )}
+
+      {showAnimation2 && (
+        <div style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1000,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            padding: '78px',
+            borderRadius: '10px'
+        }}>
+          <Lottie options={defaultOptions2} height={150} width={150} />
+          <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px' }}>No se pudo agregar el producto</p>
         </div>
       )}
 
         </div>
 	);
-};
+}
 
 export default Crud;
