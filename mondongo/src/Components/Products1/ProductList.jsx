@@ -65,6 +65,8 @@ export const ProductList = ({
     }
   };
 
+
+
   return (
       <div>
       <h1>Productos</h1>
@@ -92,7 +94,7 @@ export const ProductList = ({
           transform: 'translate(-50%, -50%)',
           zIndex: 1000,
           backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          padding: '20px',
+          padding: '78px',
           borderRadius: '10px'
         }}>
           <Lottie options={defaultOptions} height={150} width={150} />
