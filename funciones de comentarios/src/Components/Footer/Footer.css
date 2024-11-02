@@ -1,0 +1,10 @@
+.foot{
+    bottom: 0;
+    height: 60px;
+    background-color: #00F4D4;;
+    position: center;
+    padding-bottom: 10rem;
+    display: flex;
+    width: 100%;
+}
+

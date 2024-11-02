@@ -1,0 +1,2 @@
+npx create-react-app nombre-del-proyecto
+npm install bootstrap react-router-dom @supabase/supabase-js react-lottie react-icons
