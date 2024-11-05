@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../Conex/script1';
-import Lottie from 'react-lottie';
-import animacion from '../Animaciones/Animation - 1730228916688.json'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { show_alerta } from '../Animaciones/functions';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const ProductList = ({
   allProducts,
@@ -14,7 +16,6 @@ export const ProductList = ({
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(false); // Agrega esta línea para manejar el estado del carrito}
-  const [showAnimation, setShowAnimation] = useState(false);
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -50,20 +51,35 @@ export const ProductList = ({
     setTotal(total + product.precio * quantity);
     setCountProducts(countProducts + quantity);
     setAllProducts([...allProducts, { ...product, quantity }]);
-    setShowAnimation(true);
-    setTimeout(() => setShowAnimation(false), 2000);
+    show_alerta('Producto Agregado Exitosamente','success')
   };
 
 
+  const deleteProduct = async (id, nombre) => {
+    const MySawl = withReactContent(Swal);
+    const result = await MySawl.fire({
+      title:'¿Esta Seguro/a Que quiere eliminar el producto'+ nombre+' ?',
+      icon: 'question', text:'No se podra dar marcha atras',
+      showCancelButton:true,confirmButtonText:'Si, Eliminar',cancelButtonText:'Cancelar',
+      
+    })
+    if(result.isConfirmed){
+      const { error } = await supabase
+      .from('producto')
+      .delete()
+      .eq('id_producto', id);
+      if(error){
+          console.error("error", console.error);
+          show_alerta('No se pudo eliminar el producto','info')
+          console.log(id)
+        }
+        else{
+          console.log("producto Eliminado");
+          show_alerta('Producto Eliminado Exitosamente','success')
+        }
+    }    
+  }
 
-  const defaultOptions = {
-    loop: false,
-    autoplay: true,
-    animationData: animacion,
-    rendererSettings:{
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
 
 
 
@@ -82,26 +98,15 @@ export const ProductList = ({
           <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
           <button type="button" class="btn btn-warning" onClick={() => onAddProduct(producto)}>Agregar Al Carro</button>
+          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'>
+            <i class="bi bi-trash-fill"></i>
+          </button>
           </div>
         ))}
       </div>
-        
-      {showAnimation && (
-        <div style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 1000,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          padding: '78px',
-          borderRadius: '10px'
-        }}>
-          <Lottie options={defaultOptions} height={150} width={150} />
-          <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px' }}>Producto agregado al carrito!</p>
-        </div>
-      )}
+
       </div>
+      
   );
 };
 

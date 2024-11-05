@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { supabase } from "../Conex/script1"
-import Lottie from 'react-lottie';
-import animacion1 from '../Animaciones/Animation - 1730228916688.json'
-import animacion2 from '../Animaciones/Animation - 1730313250226.json' 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { show_alerta } from '../Animaciones/functions';
 
 
 const Crud = ({ isOpen, onClose }) => {
@@ -39,13 +39,11 @@ const Crud = ({ isOpen, onClose }) => {
             reader.readAsDataURL(file);
         }
     };
-    
+
     const agrega= async () => {
 
-        if (!nombre_producto || !descripcion || !precio || !categoria || !dimensiones || !existencias || !iva || !peso || !imagen_producto){
-            console.log("Error, hay campos sin rellenar")
-            setShowAnimation2(true);
-            setTimeout(() => setShowAnimation2(false), 2000);
+        if (nombre_producto.trim() === '' || descripcion.trim() === '' || precio.trim() === '' || categoria.trim() === '' || dimensiones.trim() === '' || existencias.trim() === '' || iva.trim() === '' || peso.trim() === ''){
+            show_alerta('Error, hay datos sin rellenar, porfavor complete', 'warning');
             return;
         }
         const { error } = await supabase
@@ -64,35 +62,13 @@ const Crud = ({ isOpen, onClose }) => {
         })
         if(error){
             console.error("error", console.error);
-            setShowAnimation2(true);
-            setTimeout(() => setShowAnimation2(false), 2000);
+            show_alerta('No se pudo agregar el producto','error')
         }
         else{
             console.log("producto agregado");
-            setShowAnimation(true);  
-            setTimeout(() => {setShowAnimation(false); window.location.reload(); }, 2000);
-            
+            show_alerta('Producto Agregado Exitosamente','success')
         }
     }
-    const defaultOptions1 = {
-        loop: false,
-        autoplay: true,
-        animationData: animacion1,
-        rendererSettings:{
-          preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-    const defaultOptions2 = {
-        loop: false,
-        autoplay: true,
-        animationData: animacion2,
-        rendererSettings:{
-          preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-    if(!isOpen) return null;
         
 	return (
         <div className='modal fade show' style={{ display: 'block' }}>
@@ -147,39 +123,6 @@ const Crud = ({ isOpen, onClose }) => {
                     </div>
                 </div>
             </div>
-              
-      {showAnimation && (
-        <div style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 1000,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          padding: '78px',
-          borderRadius: '10px'
-        }}>
-          <Lottie options={defaultOptions1} height={150} width={150} />
-          <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px' }}>Producto agregado!</p>
-          
-        </div>
-      )}
-
-      {showAnimation2 && (
-        <div style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1000,
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: '78px',
-            borderRadius: '10px'
-        }}>
-          <Lottie options={defaultOptions2} height={150} width={150} />
-          <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px' }}>No se pudo agregar el producto</p>
-        </div>
-      )}
 
         </div>
 	);
