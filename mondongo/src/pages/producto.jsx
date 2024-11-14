@@ -99,8 +99,13 @@ function Producto(){
                     </ul>
                     {descripcion ? (
                         <p className='descripcion'>{producto.descripcion}</p> 
-                    ) : (
-                    <p className='descripcion'>ola</p> 
+                    ) : (          
+                    <div className='descripcion'>  
+                        <p style={{backgroundColor: 'lightgray', padding: '15px', borderRadius: '5px' }}><b>Categoria:</b> {producto.categoria}</p> 
+                        <p><b>Peso:</b> {producto.peso}</p>
+                        <p style={{backgroundColor: 'lightgray', padding: '15px', borderRadius: '5px' }}><b>Dimensiones:</b> {producto.dimensiones}</p>
+                        <p><b>Fecha Creacion:</b> {producto.fecha_creacion}</p>
+                    </div>
                     )}
     
                 </div>   

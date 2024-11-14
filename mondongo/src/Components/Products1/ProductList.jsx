@@ -90,10 +90,30 @@ export const ProductList = ({
         {productos.map(producto => (
           <div key={producto.id_producto} style={{width:'18%', marginBottom: '20px' }}> 
           <a href={`/ElProducto/${producto.id_producto}`}>
+          <div style={{position:'relative', width:'150px'}}>
+             {/* Condición que verifica si las existencias del producto son menores a 5 */}
+            {producto.existencias < 5 && (
+                <img 
+                // Ruta de la imagen que se muestra cuando las existencias son bajas
+                  src='/ultimas.png' 
+                  alt="Últimas unidades"
+                  style={{
+                     // Posiciona la imagen de forma absoluta respecto al contenedor
+                    position: 'absolute',
+                    top: 0, // La imagen estará alineada en la parte superior del contenedor
+                    left: 0, // La imagen estará alineada a la izquierda del contenedor
+                    width: '50%', // La imagen ocupará el 50% del ancho del contenedor
+                    height: '50%', // La imagen ocupará el 50% de la altura del contenedor
+                    objectFit: 'cover', // Asegura que la imagen se recorte correctamente para cubrir el área
+                    zIndex: 1 // Asegura que la imagen esté por encima de otros elementos del contenedor
+                  }}
+                />
+              )}
             <img
             src={producto.imagen_producto} 
             width="150"
             />
+          </div>
           </a>
           <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
