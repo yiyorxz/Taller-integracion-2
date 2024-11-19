@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import '../Navbar/Navbar.css';
+import './Header.css';
 import logo from '../Logo/1.png';
 import Crud from '../Crud/crud';
 
@@ -60,8 +60,9 @@ export const Header = ({
 
 				<div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
 					<ul className="navbar-links">
+						<li><Link to="/products">Productos</Link></li>
 						<li><Link to="/deals">Ofertas</Link></li>
-						<li><Link to="/products">Categorías</Link></li>
+						<li><Link to="/categories">Categorías</Link></li>
 						<li><Link to="/account">Mi cuenta</Link></li>
 						<li onClick={mostrarcrud} style={{ cursor: 'pointer' }}>Agregar Producto</li>
 						<li>
