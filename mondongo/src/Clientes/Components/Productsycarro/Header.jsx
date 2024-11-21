@@ -65,6 +65,8 @@ export const Header = ({
 						<li><Link to="/deals">Ofertas</Link></li>
 						<li><Link to="/categories">Categorías</Link></li>
 						<li><Link to="/account">Mi cuenta</Link></li>
+						<li><Link to="/login">Login</Link></li>
+      					<li><Link to="/register">Registro</Link></li>
 						<li>
 							{/* Icono del carrito */}
 							<div className='container-icon'>

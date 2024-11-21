@@ -7,7 +7,7 @@ import { Header } from '../Components/Productsycarro/Header';
 import { ProductList } from '../Components/Productsycarro/ProductList';
 
 
-function HomePage() {
+function HomePageVen() {
   const [allProducts, setAllProducts] = useState([]);
 	const [total, setTotal] = useState(0);
 	const [countProducts, setCountProducts] = useState(0);
@@ -34,4 +34,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePageVen;

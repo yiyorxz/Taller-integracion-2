@@ -1,17 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { supabase } from '../Conex/script1';
 
-function RegisterPage() {
+const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase.auth.signUp({
+      email,
+      password
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+    } else {
+      setSuccessMessage('Registro exitoso. Revisa tu correo para confirmar tu cuenta.');
+      setErrorMessage('');
+    }
+  };
+
   return (
     <div>
-      <h1>Registro</h1>
-      <form>
-        <input type="text" placeholder="Nombre" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Contraseña" />
+      <h2>Registrarse</h2>
+      <form onSubmit={handleSignUp}>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
         <button type="submit">Registrarse</button>
       </form>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
     </div>
   );
-}
+};
 
-export default RegisterPage;
+export default SignUp;

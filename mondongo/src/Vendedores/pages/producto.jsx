@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../Components/Footer/Footer'; 
 import './producto.css'; 
 import { supabase } from '../Components/Conex/script1';
-import { Header } from '../Components/Products1/Header';
+import { Header } from '../Components/Productsycarro/Header';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
