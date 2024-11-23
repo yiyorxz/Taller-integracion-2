@@ -26,13 +26,13 @@ const popup = () => {
             setpopups(ofertas)
         };
         fetchofertas();
-    });
+    }, [userId]);
 
     return(
         <div>
             {popups.map((popup, index) => {
                 <div key={index}>
-                    <h3>Oferta Especial!!</h3>
+                    <h3>Oferta Especial!</h3>
                     <p>el siguiente producto esta en oferta por tiempo limitado <br/>
                        Haga click abajo
                     </p>

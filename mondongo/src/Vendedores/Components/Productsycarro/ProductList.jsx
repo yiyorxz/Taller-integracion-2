@@ -15,9 +15,44 @@ export const ProductList = ({
 }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [active, setActive] = useState(false); // Agrega esta línea para manejar el estado del carrito}
+
+  //Para editar Productos esto ..
+  const [editar, seteditar] = useState(false);
+  const [prod_ac, setprodac] = useState(null);
+  
+  const [nombre_producto, setnombre] = useState('');
+  const [descripcion, setdescripcion] = useState('')
+  const [precio, setprecio] = useState('')
+  const [categoria, setcategoria] = useState('')
+  const [dimensiones, setdimensiones] = useState('')
+  const [existencias, setexistencias] = useState('')
+  const [iva, setiva] = useState('')
+  const [peso, setpeso] = useState('')
+  const [imagen_producto, setimagen] = useState(null)
+  const [file, setFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+  //..
+
+
+  const _handleImageChange = (e) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+        setFile(file);
+        setImagePreviewUrl(reader.result);
+        setimagen(reader.result);
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+  };
+
+  
 
   useEffect(() => {
+    
     const fetchProductos = async () => {
       const { data, error } = await supabase
         .from('producto')
@@ -34,27 +69,49 @@ export const ProductList = ({
     fetchProductos();
   }, []);
 
-  const onAddProduct = (product) => {
-    const quantity = 1; // Inicializamos la cantidad en 1
-  
-    if (allProducts.find(item => item.id_producto === product.id_producto)) {
-      const products = allProducts.map(item =>
-        item.id_producto === product.id_producto
-          ? { ...item, quantity: item.quantity + quantity }
-          : item
-      );
-      setTotal(total + product.precio * quantity);
-      setCountProducts(countProducts + quantity);
-      return setAllProducts([...products]);
+
+
+  //Funcion para obtener los datos del producto seleccionado y esos datos, ponerlos en el formulario de edicion
+  const obtener = (producto) =>{
+    setprodac(producto);
+    seteditar(true);
+    setnombre(producto.nombre_producto);
+    setdescripcion(producto.descripcion);
+    setprecio(producto.precio);
+    setcategoria(producto.categoria);
+    setdimensiones(producto.dimensiones);
+    setexistencias(producto.existencias);
+    setpeso(producto.peso);
+  } 
+
+  const editProduct = async (producto) => {
+    const { error } = await supabase
+    .from('producto')
+    .update({
+        nombre_producto: nombre_producto || producto.nombre_producto, //Nombre producto sera o el nombre que tenia antes, o el q sera editado, y asi con los demas.
+        descripcion: descripcion || producto.descripcion,
+        precio: precio || producto.precio,
+        categoria: categoria || producto.categoria,
+        dimensiones: dimensiones || producto.dimensiones,
+        existencias: existencias || producto.existencias,
+        iva: iva || producto.iva,
+        peso: peso || producto.peso,
+        imagen_producto: imagen_producto || producto.imagen_producto,
+    })
+    .eq('id_producto', producto.id_producto);
+    if(error){
+        console.error("error", console.error);
+        show_alerta('No se pudo editar el producto','error')
     }
-  
-    setTotal(total + product.precio * quantity);
-    setCountProducts(countProducts + quantity);
-    setAllProducts([...allProducts, { ...product, quantity }]);
-    show_alerta('Producto Agregado Exitosamente','success')
-  };
+    else{
+        console.log("producto editado");
+        show_alerta('Producto Editado Exitosamente','success');
+        seteditar(false);
+    }
+  } 
 
 
+  //Funcion para eliminar productos
   const deleteProduct = async (id, nombre) => {
     const MySawl = withReactContent(Swal);
     const result = await MySawl.fire({
@@ -64,22 +121,53 @@ export const ProductList = ({
       
     })
     if(result.isConfirmed){
-      const { error } = await supabase //consulta para eliminar el producto segun el id
+      const { error } = await supabase 
       .from('producto')
       .delete()
-      .eq('id_producto', id);
+      .eq('id_producto', id)
       if(error){
           console.error("error", console.error);
           show_alerta('No se pudo eliminar el producto','info')
           console.log(id)
+          return;
         }
-        else{
-          console.log("producto Eliminado");
-          show_alerta('Producto Eliminado Exitosamente','success')
-        }
-    }    
-  }
+        
+      const { error: Errorhistorial } = await supabase 
+        .from('historial_creacion_productos')
+        .delete()
+        .eq('id_producto', id);
+        if(Errorhistorial){
+            console.error("error", console.error);
+            show_alerta('No se pudo eliminar el producto','info')
+            console.log(id)
+            return;
+          }
+      const { error: Errorpuntua } = await supabase
+        .from('puntuaciones')
+        .delete()
+        .eq('id_producto', id);
+        if(Errorpuntua){
+            console.error("error", console.error);
+            show_alerta('No se pudo eliminar el producto','info')
+            console.log(id)
+            return;
+          }
+      const { error: Errorcome} = await supabase
+        .from('comentarios')
+        .delete()
+        .eq('id_producto', id);
+        if(Errorcome){
+            console.error("error", console.error);
+            show_alerta('No se pudo eliminar el producto','info')
+            console.log(id)
+            return;
+          }    
 
+    console.log("producto Eliminado");
+    show_alerta('Producto Eliminado Exitosamente','success')
+        }   
+  }
+//..
 
 
 
@@ -117,14 +205,67 @@ export const ProductList = ({
           </a>
           <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
-          <button type="button" class="btn btn-warning" onClick={() => onAddProduct(producto)}>Agregar Al Carro</button>
-          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'> // Boton de Eliminar Producto
-            <i class="bi bi-trash-fill"></i> //Icono
+          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'>         
+            <i class="bi bi-trash-fill"></i> 
+          </button> 
+          <button onClick={() => obtener(producto)}className='btn btn-warning'>
+              <i class="bi bi-pencil"></i>
           </button>
           </div>
         ))}
       </div>
+      {editar && (
+        <div className='modal fade show' style={{ display: 'block' }}>
+        <div className='modal-dialog'>
+            <div className='modal-content'>
+                <div className='modal-header'>
+                    <label className='h5'></label>
+                    <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close' onClick={() => seteditar(false)}></button>    
+                </div>
+                <div className='modal-body'>
+                    <h3>Edita tu producto</h3>
+                    <input type='hidden' id='id'></input>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='text' className='form-control' placeholder='Nombre' value={nombre_producto} onChange={(e) => setnombre(e.target.value)}/>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='text' id='descripcion' className='form-control' placeholder='Descripcion' value={descripcion} onChange={(e) => setdescripcion(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type="number" id='precio' className='form-control' placeholder='Precio' value={precio} onChange={(e) => setprecio(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='text' id='categoria' className='form-control' placeholder='Categoria' value={categoria} onChange={(e) => setcategoria(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='text' id='dimensiones' className='form-control' placeholder='Dimensiones' value={dimensiones} onChange={(e) => setdimensiones(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='number' id='existencias' className='form-control' placeholder='Existencias' value={existencias} onChange={(e) => setexistencias(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='text' id='peso' className='form-control' placeholder='Peso' value={peso} onChange={(e) => setpeso(e.target.value)}></input>
+                    </div>
+                    <div className='input-group mb-3'>
+                        <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                        <input type='file' id='imagen' className='form-control' placeholder='Imagen' onChange={_handleImageChange}></input>
+                    </div>
+                    <div className='modal-footer'>
+                        <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={() => editProduct(prod_ac)}>Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        </div>
+      )}
       </div>
       
   );
