@@ -5,14 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../Animaciones/functions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const ProductList = ({
-  allProducts,
-  setAllProducts,
-  countProducts,
-  setCountProducts,
-  total,
-  setTotal,
-}) => {
+export const ProductList = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 

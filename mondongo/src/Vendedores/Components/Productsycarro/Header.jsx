@@ -4,23 +4,8 @@ import './Header.css';
 import logo from '../Logo/1.png';
 import Crud from '../Crud/crud';
 
-export const Header = ({
-	allProducts,
-	setAllProducts,
-	total,
-	countProducts,
-	setCountProducts,
-	setTotal,
-}) => {
+export const Header = () => {
 	const [active, setActive] = useState(false);
-	const onDeleteProduct = product => {
-		const results = allProducts.filter(
-			item => item.id_producto !== product.id_producto
-		);
-		setTotal(total - product.precio * product.quantity);
-		setCountProducts(countProducts - product.quantity);
-		setAllProducts(results);
-	};
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};

@@ -5,28 +5,12 @@ import { ProductList } from '../Components/Productsycarro/ProductList';
 
 
 function LosProductos(){
-    const [allProducts, setAllProducts] = useState([]);
-    const [total, setTotal] = useState(0);
-    const [countProducts, setCountProducts] = useState(0);
+
     return (
         <div>
-                <Header
-                    allProducts={allProducts}
-                    setAllProducts={setAllProducts}
-                    total={total}
-                    setTotal={setTotal}
-                    countProducts={countProducts}
-                    setCountProducts={setCountProducts}
-                />
+                <Header/>
             <main>
-                <ProductList
-                    allProducts={allProducts}
-                    setAllProducts={setAllProducts}
-                    total={total}
-                    setTotal={setTotal}
-                    countProducts={countProducts}
-                    setCountProducts={setCountProducts}
-                />
+                <ProductList/>
             </main>
             <Footer />
         </div>  
