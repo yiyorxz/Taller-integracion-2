@@ -64,7 +64,7 @@ export const ProductList = ({
       
     })
     if(result.isConfirmed){
-      const { error } = await supabase
+      const { error } = await supabase //consulta para eliminar el producto segun el id
       .from('producto')
       .delete()
       .eq('id_producto', id);
@@ -118,8 +118,8 @@ export const ProductList = ({
           <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
           <button type="button" class="btn btn-warning" onClick={() => onAddProduct(producto)}>Agregar Al Carro</button>
-          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'>
-            <i class="bi bi-trash-fill"></i>
+          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'> // Boton de Eliminar Producto
+            <i class="bi bi-trash-fill"></i> //Icono
           </button>
           </div>
         ))}
