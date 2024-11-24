@@ -5,7 +5,7 @@ import Footer from '../Components/Footer/Footer'; // Pie de página
 import './Homepage.css'; // Estilos de la página de inicio
 import { Header } from '../Components/Productsycarro/Header';
 import { ProductList } from '../Components/Productsycarro/ProductList';
-
+import Popup from '../Components/PopUp/Popup';
 
 function HomePage() {
   const [allProducts, setAllProducts] = useState([]);
@@ -22,6 +22,7 @@ function HomePage() {
 			setCountProducts={setCountProducts}
 		/>
       <main>
+        <Popup/>
         <section className="hero">
           <h1>Bienvenidos a Nuestra Tienda</h1>
           <p>Descubre los mejores productos para cada categoría.</p>
