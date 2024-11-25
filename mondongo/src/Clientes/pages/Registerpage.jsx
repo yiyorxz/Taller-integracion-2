@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../Conex/script1';
+import { supabase } from '../Components/Conex/script1';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
