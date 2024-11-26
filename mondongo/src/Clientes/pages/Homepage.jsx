@@ -6,7 +6,6 @@ import './Homepage.css'; // Estilos de la página de inicio
 import { Header } from '../Components/Productsycarro/Header';
 import { ProductList } from '../Components/Productsycarro/ProductList';
 import Popup from '../Components/PopUp/Popup'
-import { UserContext } from '../Components/Conex/UserContext';
 
 function HomePage() {
 
