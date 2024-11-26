@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../Components/Conex/script1';
+import './SignUp.css';
+
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -15,9 +17,7 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
     try {
-      // Crear el usuario en Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -28,22 +28,19 @@ const SignUp = () => {
         return;
       }
 
-      // Insertar datos adicionales en la tabla 'usuario'
-      const { error: dbError } = await supabase
-        .from('usuario')
-        .insert([
-          {
-            correo_email: email,
-            contrasena: password, // Evita almacenar contraseñas en texto plano, este es solo un ejemplo
-            auth_id: authData.user.id, // ID generado por Supabase Auth
-            nombre,
-            apellido,
-            rut,
-            telefono,
-            tipo_usuario: tipoUsuario,
-            direccion,
-          },
-        ]);
+      const { error: dbError } = await supabase.from('usuario').insert([
+        {
+          correo_email: email,
+          contrasena: password, // Evita almacenar contraseñas en texto plano
+          auth_id: authData.user.id,
+          nombre,
+          apellido,
+          rut,
+          telefono,
+          tipo_usuario: tipoUsuario,
+          direccion,
+        },
+      ]);
 
       if (dbError) {
         throw new Error('Error al registrar datos adicionales: ' + dbError.message);
@@ -58,67 +55,71 @@ const SignUp = () => {
 
   return (
     <div>
-      <h2>Registrarse</h2>
-      <form onSubmit={handleSignUp}>
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Apellido"
-          value={apellido}
-          onChange={(e) => setApellido(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="RUT"
-          value={rut}
-          onChange={(e) => setRut(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Teléfono"
-          value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Dirección"
-          value={direccion}
-          onChange={(e) => setDireccion(e.target.value)}
-        />
-        <select
-          value={tipoUsuario}
-          onChange={(e) => setTipoUsuario(e.target.value)}
-        >
-          <option value="cliente">Cliente</option>
-          <option value="vendedor">Vendedor</option>
-          <option value="admin">Administrador</option>
-        </select>
-        <button type="submit">Registrarse</button>
-      </form>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      <div className="header">¡Regístrate en MondongoGO!</div>
+      <div className="container">
+        <h2>Registrarse</h2>
+        <form onSubmit={handleSignUp}>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Apellido"
+            value={apellido}
+            onChange={(e) => setApellido(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="RUT"
+            value={rut}
+            onChange={(e) => setRut(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Teléfono"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Dirección"
+            value={direccion}
+            onChange={(e) => setDireccion(e.target.value)}
+          />
+          <select
+            value={tipoUsuario}
+            onChange={(e) => setTipoUsuario(e.target.value)}
+          >
+            <option value="cliente">Cliente</option>
+            <option value="vendedor">Vendedor</option>
+            <option value="admin">Administrador</option>
+          </select>
+          <button type="submit">Registrarse</button>
+        </form>
+        {errorMessage && <p className="error">{errorMessage}</p>}
+        {successMessage && <p className="success">{successMessage}</p>}
+      </div>
+      <div className="footer">© 2024 MondongoGO</div>
     </div>
   );
 };
