@@ -55,7 +55,7 @@ function Login() {
         </form>
         {mensaje && <p>{mensaje}</p>}
         <p>
-          ¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link>
+          ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
         </p>
       </div>
       <div className="footer">© 2024 MondongoGO</div>
