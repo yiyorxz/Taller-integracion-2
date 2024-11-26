@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../Conex/script1'; // Importamos la conexión a Supabase
 import Swal from 'sweetalert2'; // Importamos SweetAlert2 para mostrar alertas
 import withReactContent from 'sweetalert2-react-content'; // Extensión para usar React con SweetAlert2
 import { show_alerta } from '../Animaciones/functions'; // Importamos función personalizada para alertas
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importamos estilos de Bootstrap
+import { UserContext } from '../Conex/UserContext';
 
 export const ProductList = ({
   allProducts, // Lista de productos en el carrito
@@ -16,6 +17,7 @@ export const ProductList = ({
   const [productos, setProductos] = useState([]); // Estado para almacenar los productos obtenidos
   const [loading, setLoading] = useState(true); // Estado para controlar la carga de datos
   const [active, setActive] = useState(false); // Estado adicional para manejar la activación del carrito (opcional)
+  const { user } = useContext(UserContext);
 
   // Hook useEffect para cargar los productos desde la base de datos al montar el componente
   useEffect(() => {
@@ -38,6 +40,10 @@ export const ProductList = ({
   // Función para agregar un producto al carrito
   const onAddProduct = (product) => {
     const quantity = 1; // Cada producto agregado tiene una cantidad inicial de 1
+    if (!user) {
+      alert('Inicia sesión para agregar productos al carrito');
+      return;
+    }
 
     // Verificamos si el producto ya existe en el carrito
     if (allProducts.find(item => item.id_producto === product.id_producto)) {
