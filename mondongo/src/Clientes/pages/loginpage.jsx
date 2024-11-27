@@ -98,6 +98,8 @@ function Login() {
         navigate('/home');
       } else if (userData.tipo_usuario === 'vendedor') {
         navigate('/homeven');
+      } else if (userData.tipo_usuario === 'admin'){
+        navigate('/homeadm')
       }
 
     } catch (error) {

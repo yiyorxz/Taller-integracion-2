@@ -14,6 +14,11 @@ import { UserProvider, UserContext } from './Clientes/Components/Conex/UserConte
 import HomePageVen from './Vendedores/pages/Homepage';
 import LosProductosVen from './Vendedores/pages/Losproductos';
 
+//para los admins
+import HomePageAdm from './Administradores/pages/Homepage';
+import LosProductosAdm from './Administradores/pages/Losproductos';
+
+
 
 function App() {
   return (
@@ -31,6 +36,10 @@ function App() {
 
           <Route path="/homeven" element={<HomePageVen/>} />
           <Route path='/productoven' element={<LosProductosVen/>} />
+
+          <Route path="/homeadm" element={<HomePageAdm/>} />
+          <Route path='/productoadm' element={<LosProductosAdm/>} />
+
         </Routes>
       </Router>
     </UserProvider>
