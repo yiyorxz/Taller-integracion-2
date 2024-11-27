@@ -1,0 +1,72 @@
+/* comentarios.css */
+.comentario-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  .comentario-container h3 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 120px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #68F42C;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #56d129;
+  }
+  
+  .comentario {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  
+  .comentario strong {
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .comentario p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .comentario span {
+    font-size: 12px;
+    color: #777;
+  }
+  

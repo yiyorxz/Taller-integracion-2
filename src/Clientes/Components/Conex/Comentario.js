@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './script1'; // Configuración de Supabase
 import { useUser } from './UserContext'; // Contexto para obtener el usuario logueado
+import './Comentario.css'; // Importa el archivo CSS
 
 function Comentario({ productoId }) {
   const { user } = useUser(); // Usuario actual
@@ -48,13 +49,11 @@ function Comentario({ productoId }) {
     // Insertamos el comentario en la base de datos
     const { data, error } = await supabase
       .from('comentarios')
-      .insert([
-        {
-          comentario: contenido,
-          id_usuario: user.id_usuario, // Usamos el id_usuario del contexto
-          id_producto: productoId, // Asociamos el comentario al producto
-        },
-      ]);
+      .insert([{
+        comentario: contenido,
+        id_usuario: user.id_usuario, // Usamos el id_usuario del contexto
+        id_producto: productoId, // Asociamos el comentario al producto
+      }]);
   
     // Verificar si hay un error al insertar el comentario
     if (error) {
@@ -73,10 +72,9 @@ function Comentario({ productoId }) {
       }
     }
   };
-  
 
   return (
-    <div>
+    <div className="comentario-container">
       <h3>Comentarios</h3>
 
       {/* Formulario de comentarios */}

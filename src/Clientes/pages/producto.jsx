@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../Components/Animaciones/functions';
 import Comentario from '../Components/Conex/Comentario';  // Asegúrate de importar el componente de comentarios
+import Puntuacion from '../Components/Conex/Puntuacion';  // Importamos el componente de puntuación
 
 function Producto() {
   const { id_producto } = useParams();
@@ -105,8 +106,14 @@ function Producto() {
           <button type="button" className="btn btn-warning" onClick={() => onAddProduct(producto)}>Agregar Al Carro</button>
         </div>
 
-        {/* Componente de comentarios */}
-        <Comentario productoId={id_producto} />  {/* Pasamos el id_producto al componente Comentario */}
+        {/* Contenedor para comentarios y puntuaciones */}
+        <div className='comentarios-puntuaciones'>
+          {/* Componente de puntuación */}
+          <Puntuacion productoId={id_producto} />  {/* Pasamos el id_producto al componente de Puntuación */}
+
+          {/* Componente de comentarios */}
+          <Comentario productoId={id_producto} />  {/* Pasamos el id_producto al componente Comentario */}
+        </div>
 
       </main>
       <Footer />

@@ -1,0 +1,46 @@
+/* Estilos para las puntuaciones */
+.puntuacion-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .puntuacion-container h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .puntuacion-container .estrellas {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .puntuacion-container .estrellas button {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .puntuacion-container .estrellas button:hover {
+    color: gold;
+  }
+  
+  .puntuacion-container .estrellas button.selected {
+    color: gold;
+  }
+  
+  .puntuacion-container .puntuacion-actual {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: bold;
+  }
+  
