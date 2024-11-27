@@ -1,0 +1,112 @@
+/* General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .header {
+    background-color: #00e0d3;
+    color: white;
+    text-align: left;
+    padding: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    border-bottom: 3px solid #007c7c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container {
+    width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #007c7c;
+    text-align: left;
+    border-bottom: 2px solid #00e0d3;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+  }
+  
+  /* Form */
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Campos en dos columnas */
+    gap: 20px 30px;
+    align-items: center;
+  }
+  
+  input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #007c7c;
+    box-shadow: 0 0 4px #007c7c;
+  }
+  
+  /* Botones */
+  button {
+    grid-column: span 2; /* Ocupa toda la fila */
+    background-color: #00e0d3;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-transform: uppercase;
+  }
+  
+  button:hover {
+    background-color: #007c7c;
+  }
+  
+  button:active {
+    transform: scale(0.97);
+    background-color: #005c5c;
+  }
+  
+  /* Mensajes */
+  .error, .success {
+    grid-column: span 2; /* Ocupan toda la fila */
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  
+  .error {
+    color: #ff4d4f;
+  }
+  
+  .success {
+    color: #4caf50;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #999;
+    font-size: 0.85em;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
