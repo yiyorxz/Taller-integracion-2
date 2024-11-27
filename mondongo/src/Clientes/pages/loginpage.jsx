@@ -94,7 +94,7 @@ function Login() {
       }
 
       // Redirigir según el tipo de usuario
-      if (userData.tipo_usuario === 'comprador') {
+      if (userData.tipo_usuario === 'cliente') {
         navigate('/home');
       } else if (userData.tipo_usuario === 'vendedor') {
         navigate('/homeven');
