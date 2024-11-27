@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom'; // Importamos Link para la navegación entre rutas
 import './Header.css'; // Estilos personalizados para el encabezado
 import logo from '../Logo/1.png'; // Importamos el logo de la aplicación
+import { FaUserAltSlash, FaUserAlt } from "react-icons/fa";
+import { UserContext } from '../Conex/UserContext';
 
 export const Header = ({
 	allProducts, // Lista de productos en el carrito
@@ -15,7 +17,7 @@ export const Header = ({
 	const [active, setActive] = useState(false); // Controla si el carrito está visible
 	const [isOpen, setIsOpen] = useState(false); // Controla si el menú está abierto
 	const [crud, setcrud] = useState(false); // Estado adicional para gestionar otros cambios
-
+	const {user} = useContext(UserContext)
 	// Función para eliminar un producto del carrito
 	const onDeleteProduct = product => {
 		const results = allProducts.filter(
@@ -64,9 +66,12 @@ export const Header = ({
 						<li><Link to="/products">Productos</Link></li>
 						<li><Link to="/deals">Ofertas</Link></li>
 						<li><Link to="/categories">Categorías</Link></li>
-						<li><Link to="/account">Mi cuenta</Link></li>
 						<li><Link to="/login">Login</Link></li>
       					<li><Link to="/register">Registro</Link></li>
+						
+						<li><Link to="/account">
+						{user ? <FaUserAlt size={40} /> : <FaUserAltSlash size={40} />}
+						</Link></li>
 						<li>
 							{/* Icono del carrito */}
 							<div className='container-icon'>

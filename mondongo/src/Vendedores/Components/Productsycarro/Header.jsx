@@ -1,8 +1,10 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../Logo/1.png';
 import Crud from '../Crud/crud';
+import { FaUserAltSlash, FaUserAlt } from "react-icons/fa";
+import { UserContext } from '../../../Clientes/Components/Conex/UserContext';
 
 export const Header = ({
 	allProducts,
@@ -26,6 +28,7 @@ export const Header = ({
 	};
 	const [isOpen, setIsOpen] = useState(false);
 	const [crud, setcrud] = useState(false);
+	const {user} = useContext(UserContext)
 	
 
 
@@ -58,9 +61,11 @@ export const Header = ({
 						<li><Link to="/productoven">Productos</Link></li>
 						<li><Link to="/deals">Ofertas</Link></li>
 						<li><Link to="/categories">Categorías</Link></li>
-						<li><Link to="/account">Mi cuenta</Link></li>
 						<li><Link to="/login">Login</Link></li>
       					<li><Link to="/register">Registro</Link></li>
+						<li><Link to="/profileven">
+						{user ? <FaUserAlt size={40} /> : <FaUserAltSlash size={40} />}
+						</Link></li>
 						<li onClick={mostrarcrud} style={{ cursor: 'pointer' }}>Agregar Producto</li>
 					</ul>
 				</div>

@@ -22,7 +22,9 @@ const Crud = ({ isOpen, onClose }) => {
     const [file, setFile] = useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
     const id_usuario = user.id_usuario
-
+    function refreshPage(){ 
+        window.location.reload(); 
+    }
     
 
     const _handleImageChange = (e) => {
@@ -42,7 +44,7 @@ const Crud = ({ isOpen, onClose }) => {
 
     const agrega= async () => {
 
-        if (nombre_producto.trim() === '' || descripcion.trim() === '' || precio.trim() === '' || categoria.trim() === '' || dimensiones.trim() === '' || existencias.trim() === '' || iva.trim() === '' || peso.trim() === ''){
+        if (nombre_producto.trim() === '' || descripcion.trim() === '' || precio.trim() === '' || categoria.trim() === '' || dimensiones.trim() === '' || existencias.trim() === '' || peso.trim() === ''){
             show_alerta('Error, hay datos sin rellenar, porfavor complete', 'warning');
             return;
         }
@@ -55,7 +57,6 @@ const Crud = ({ isOpen, onClose }) => {
             categoria,
             dimensiones,
             existencias,
-            iva,
             peso,
             imagen_producto: imagen_producto,
             id_usuario
@@ -77,6 +78,8 @@ const Crud = ({ isOpen, onClose }) => {
         else{
             console.log("producto agregado");
             show_alerta('Producto Agregado Exitosamente','success')
+            refreshPage()
+            
         }
 
     }
@@ -115,10 +118,6 @@ const Crud = ({ isOpen, onClose }) => {
                         <div className='input-group mb-3'>
                             <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
                             <input type='number' id='existencias' className='form-control' placeholder='Existencias' value={existencias} onChange={(e) => setexistencias(e.target.value)}></input>
-                        </div>
-                        <div className='input-group mb-3'>
-                            <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
-                            <input type='number' id='iva' className='form-control' placeholder='Iva' value={iva} onChange={(e) => setiva(e.target.value)}></input>
                         </div>
                         <div className='input-group mb-3'>
                             <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>

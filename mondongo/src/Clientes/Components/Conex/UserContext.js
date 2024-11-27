@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Crear el contexto
 export const UserContext = createContext();
@@ -8,7 +9,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     // Recupera el usuario desde localStorage si existe
     const savedUser = localStorage.getItem('user');
-    
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
@@ -16,18 +16,17 @@ export const UserProvider = ({ children }) => {
     // Sincronizar el usuario con localStorage
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
-      
     } else {
       localStorage.removeItem('user');
     }
   }, [user]);
 
   const logout = () => {
-    setUser(null);
+    setUser(null); // Limpia el usuario del contexto
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, logout}}>
+    <UserContext.Provider value={{ user, setUser, logout }}>
       {children}
     </UserContext.Provider>
   );

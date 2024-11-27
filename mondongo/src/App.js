@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {useNavigate, BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import HomePage from './Clientes/pages/Homepage';
 import LoginPage from './Clientes/pages/loginpage';
 import Registerpage from './Clientes/pages/Registerpage';
@@ -13,6 +13,7 @@ import { UserProvider, UserContext } from './Clientes/Components/Conex/UserConte
 //para los vendedores
 import HomePageVen from './Vendedores/pages/Homepage';
 import LosProductosVen from './Vendedores/pages/Losproductos';
+import ProfileVen from './Vendedores/pages/Profile';
 
 //para los admins
 import HomePageAdm from './Administradores/pages/Homepage';
@@ -36,6 +37,7 @@ function App() {
 
           <Route path="/homeven" element={<HomePageVen/>} />
           <Route path='/productoven' element={<LosProductosVen/>} />
+          <Route path='/profileven' element={<ProfileVen />} />
 
           <Route path="/homeadm" element={<HomePageAdm/>} />
           <Route path='/productoadm' element={<LosProductosAdm/>} />
@@ -48,11 +50,16 @@ function App() {
 
 function Bienvenida() {
   const { user, logout } = useContext(UserContext); // Ahora el contexto es accesible
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout(); // Llamar al método para cerrar sesión
+    navigate('/home'); // Redirigir al login después de cerrar sesión
+  };
 
   return (
     <div>
       Bienvenido {user?.nombre}
-      <button onClick={logout}>Cerrar</button>
+      <button onClick={handleLogout}>Cerrar</button>
     </div>
   );
 }

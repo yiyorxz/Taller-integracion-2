@@ -15,6 +15,7 @@ export const ProductList = ({
   setTotal, // Función para actualizar el precio total
 }) => {
   const [productos, setProductos] = useState([]); // Estado para almacenar los productos obtenidos
+  const [usuarios, setUsuarios] = useState([]);
   const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías únicas
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(''); // Estado para la categoría activa
   const [loading, setLoading] = useState(true); // Estado para controlar la carga de datos
@@ -38,6 +39,19 @@ export const ProductList = ({
         setCategorias(categoriasUnicas); // Guardamos las categorías en el estado
       }
       setLoading(false); // Cambiamos el estado de carga
+
+      const { data: usuariosData, error: usuariosError } = await supabase
+      .from('usuario') // Asegúrate de que la tabla de usuarios se llame "usuario"
+      .select('id_usuario, nombre'); // Selecciona solo las columnas necesarias
+      if (usuariosError) throw usuariosError;
+
+    // Crear un diccionario para mapear id_usuario a nombre
+      const usuariosMap = {};
+      usuariosData.forEach((usuario) => {
+        usuariosMap[usuario.id_usuario] = usuario.nombre;
+      });
+      setProductos(data);
+      setUsuarios(usuariosMap);
     };
 
     fetchProductos(); // Llamamos a la función para obtener los productos
@@ -120,6 +134,7 @@ export const ProductList = ({
                     }}
                   />
                 )}
+                <p>{usuarios[producto.id_usuario]}</p>
                 <img src={producto.imagen_producto} width="150" alt={producto.nombre_producto} />
               </div>
             </a>

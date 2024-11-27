@@ -1,0 +1,12 @@
+.container {
+    width: 1500px;
+    height: 1000px;
+  }
+  
+.tab-content{
+    height: 500px;
+}  
+
+.form-control mb-1{
+    width: 500rem;
+}
