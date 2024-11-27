@@ -26,7 +26,7 @@ function Login() {
       alert('Inicio de sesión exitoso. Bienvenido ' + usuarios[0].nombre);
       if (usuarios[0].tipo_usuario === 'vendedor') {
         navigate('/homevendedor');
-      } else if (usuarios[0].tipo_usuario === 'comprador') {
+      } else if (usuarios[0].tipo_usuario === 'cliente') {
         navigate('/home');
       } else {
         setMensaje('Error: Tipo de usuario desconocido');

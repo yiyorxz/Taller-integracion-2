@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../Conex/script1';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../Animaciones/functions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContext } from '../../../Clientes/Components/Conex/UserContext';
 
 export const ProductList = ({
   allProducts,
@@ -15,6 +16,7 @@ export const ProductList = ({
 }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user} = useContext(UserContext);
 
   //Para editar Productos esto ..
   const [editar, seteditar] = useState(false);
@@ -32,7 +34,7 @@ export const ProductList = ({
   const [file, setFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
   //..
-
+  const [userproducts, setuserProducts] = useState([])
 
   const _handleImageChange = (e) => {
     let reader = new FileReader();
@@ -62,12 +64,23 @@ export const ProductList = ({
         console.error('Error al obtener productos:', error.message);
       } else {
         setProductos(data);
+
+        if(user){
+          const { data: userproducts, error } = await supabase
+          .from('producto')
+          .select('id_producto')
+          .eq('id_usuario', user.id_usuario)
+
+          setuserProducts(userproducts.map(producto => producto.id_producto))
+        }
       }
       setLoading(false);
     };
 
     fetchProductos();
-  }, []);
+  }, [user]);
+
+
 
 
 
@@ -121,16 +134,6 @@ export const ProductList = ({
       
     })
     if(result.isConfirmed){
-      const { error } = await supabase 
-      .from('producto')
-      .delete()
-      .eq('id_producto', id)
-      if(error){
-          console.error("error", console.error);
-          show_alerta('No se pudo eliminar el producto','info')
-          console.log(id)
-          return;
-        }
         
       const { error: Errorhistorial } = await supabase 
         .from('historial_creacion_productos')
@@ -162,8 +165,30 @@ export const ProductList = ({
             console.log(id)
             return;
           }    
+      const { error: Errordes } = await supabase 
+          .from('descuentos')
+          .delete()
+          .eq('id_producto', id);
+          if(Errordes){
+              console.error("error", console.error);
+              show_alerta('No se pudo eliminar el producto','info')
+              console.log(id)
+              return;
+            }
+      const { error } = await supabase 
+      .from('producto')
+      .delete()
+      .eq('id_producto', id)
+      if(error){
+          console.error("error", console.error);
+          show_alerta('No se pudo eliminar el producto','info')
+          console.log(id)
+          return;
+        }
 
+    console.log("producto Eliminado");
     show_alerta('Producto Eliminado Exitosamente','success')
+    setProductos((prev) => prev.filter((producto) => producto.id_producto !== id));
         }   
   }
 //..
@@ -204,12 +229,16 @@ export const ProductList = ({
           </a>
           <h2 className='product-name' style={{fontSize:'15px'}}>{producto.nombre_producto}</h2>
           <p className='product-price'>${producto.precio}</p>
-          <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'>         
-            <i class="bi bi-trash-fill"></i> 
-          </button> 
-          <button onClick={() => obtener(producto)}className='btn btn-warning'>
-              <i class="bi bi-pencil"></i>
-          </button>
+          {userproducts.includes(producto.id_producto) && (
+            <button onClick={() => deleteProduct(producto.id_producto, producto.nombre_producto)} className='btn btn-danger'>         
+              <i class="bi bi-trash-fill"></i> 
+            </button> 
+          )}
+          {userproducts.includes(producto.id_producto) && (
+            <button onClick={() => obtener(producto)}className='btn btn-warning'>
+                <i class="bi bi-pencil"></i>
+            </button>
+          )}  
           </div>
         ))}
       </div>

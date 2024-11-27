@@ -1,14 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from "../Conex/script1"
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../Animaciones/functions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContext } from '../../../Clientes/Components/Conex/UserContext';
 
 const Crud = ({ isOpen, onClose }) => {
 
-	
+    const { user} = useContext(UserContext);
     const [nombre_producto, setnombre] = useState('');
     const [descripcion, setdescripcion] = useState('')
     const [precio, setprecio] = useState('')
@@ -20,6 +21,7 @@ const Crud = ({ isOpen, onClose }) => {
     const [imagen_producto, setimagen] = useState(null)
     const [file, setFile] = useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+    const id_usuario = user.id_usuario
 
     
 
@@ -55,17 +57,28 @@ const Crud = ({ isOpen, onClose }) => {
             existencias,
             iva,
             peso,
-            imagen_producto: imagen_producto
+            imagen_producto: imagen_producto,
+            id_usuario
 
         })
         if(error){
             console.error("error", console.error);
             show_alerta('No se pudo agregar el producto','error')
         }
+        const {errorusuario} = await supabase
+        .from('historial_creacion_productos')
+        .insert({
+            id_usuario
+        })
+            if(errorusuario){
+                console.error("error", console.error);
+                show_alerta('No se pudo agregar el producto','error')
+            }
         else{
             console.log("producto agregado");
             show_alerta('Producto Agregado Exitosamente','success')
         }
+
     }
         
 	return (
