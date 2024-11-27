@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { supabase } from "../Conex/script1";
 import './Popup.css';
 import { useNavigate } from 'react-router-dom';
-
+import { UserContext } from "../Conex/UserContext";
 
 
 const fetchPopups = async () => {
@@ -24,10 +24,14 @@ const Popup = () => {
     const navigate = useNavigate();
     const [popups, setpopups] = useState([]);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const { user } = useContext(UserContext);
     useEffect(() => {
         const fetchofertas = async () => {
             const ofertas = await fetchPopups();
-              // Mostrar el pop-up solo si hay ofertas y actualmente no está visible
+              // Mostrar el pop-up solo si hay usuario iniciado de sesion
+              if (!user) {
+                return;
+            }
               if (ofertas.length > 0 && !isPopupVisible) {
                 const randomoferta = ofertas[Math.floor(Math.random() * ofertas.length)];
                 setpopups(randomoferta);
