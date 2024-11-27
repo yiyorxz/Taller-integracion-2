@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './Clientes/pages/Homepage';
 import LoginPage from './Clientes/pages/loginpage';
 import Registerpage from './Clientes/pages/Registerpage';
-import Producto from './Clientes/pages/producto';
+import Producto from './Clientes/pages/productodetalles';
 import LosProductos from './Clientes/pages/Losproductos';
 import Profile from './Clientes/Components/Conex/profile';
 import { UserProvider, UserContext } from './Clientes/Components/Conex/UserContext';

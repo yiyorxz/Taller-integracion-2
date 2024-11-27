@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../Components/Conex/script1';
-import './SignUp.css';
+import './Registerpage.css';
 
 
 const SignUp = () => {

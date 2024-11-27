@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../Components/Conex/script1';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../Components/Conex/UserContext';
-import './Login.css';
+import './loginpage.css';
 
 
 function Login() {

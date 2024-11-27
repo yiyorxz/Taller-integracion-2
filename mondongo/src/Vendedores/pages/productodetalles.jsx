@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../Components/Footer/Footer'; 
-import './producto.css'; 
+import './productodetalles.css'; 
 import { supabase } from '../Components/Conex/script1';
 import { Header } from '../Components/Productsycarro/Header';
 import { useParams } from 'react-router-dom';
