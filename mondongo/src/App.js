@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './Clientes/pages/Homepage';
 import LoginPage from './Clientes/pages/loginpage';
-import RegisterPage from './Clientes/pages/Registerpage';
+import Registerpage from './Clientes/pages/registerpage';
 import Producto from './Clientes/pages/producto';
 import LosProductos from './Clientes/pages/Losproductos';
 import Profile from './Clientes/Components/Conex/profile';
@@ -20,7 +20,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<LosProductos />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register" element={<Registerpage />} />
           <Route path="/ElProducto/:id_producto" element={<Producto />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
